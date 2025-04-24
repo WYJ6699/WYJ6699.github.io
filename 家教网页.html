@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优学家教服务平台 - 专业一对一辅导</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        nav a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #2E7D32;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 15px;
+            margin-top: 0;
+            font-size: 28px;
+        }
+        .teacher-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background-color: white;
+            display: flex;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .teacher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .teacher-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #eee;
+            margin-right: 20px;
+            overflow: hidden;
+        }
+        .teacher-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .teacher-info {
+            flex: 1;
+        }
+        .teacher-rating {
+            color: #FFC107;
+            font-size: 18px;
+            margin: 5px 0;
+        }
+        .feature-box {
+            display: inline-block;
+            width: 30%;
+            margin: 1%;
+            padding: 25px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            vertical-align: top;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+        .feature-icon {
+            font-size: 40px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        .search-box {
+            padding: 30px;
+            background: linear-gradient(135deg, #e9f7ef, #d4edda);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        input, select, button, textarea {
+            padding: 12px;
+            margin: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            padding: 12px 25px;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .testimonial {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+        .testimonial-author {
+            font-weight: bold;
+            color: #4CAF50;
+            margin-top: 10px;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .price-table th, .price-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        .price-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .price-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .subject-tag {
+            display: inline-block;
+            background-color: #e9f7ef;
+            color: #2E7D32;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .contact-form textarea {
+            grid-column: span 2;
+            height: 150px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .stat-item {
+            padding: 20px;
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+        .how-it-works {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+        .step {
+            text-align: center;
+            width: 22%;
+            position: relative;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            left: 75%;
+            width: 50%;
+            height: 2px;
+            background-color: #4CAF50;
+        }
+        .newsletter {
+            background-color: #4CAF50;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        .newsletter input {
+            width: 300px;
+            max-width: 100%;
+        }
+        @media (max-width: 768px) {
+            .feature-box, .step {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            .contact-form textarea {
+                grid-column: span 1;
+            }
+            .how-it-works {
+                flex-direction: column;
+            }
+            .step:not(:last-child)::after {
+                display: none;
+            }
+            .teacher-card {
+                flex-direction: column;
+            }
+            .teacher-avatar {
+                margin: 0 auto 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>优学家教服务平台</h1>
+        <p>专业一对一辅导 | 10年教育经验 | 5000+成功案例</p>
+    </header>
+   
+    <nav>
+        <a href="#home">首页</a>
+        <a href="#teachers">教师资源</a>
+        <a href="#features">特色服务</a>
+        <a href="#pricing">收费标准</a>
+        <a href="#testimonials">学员评价</a>
+        <a href="#process">服务流程</a>
+        <a href="#contact">联系我们</a>
+    </nav>
+   
+    <div class="container">
+        <div id="home" class="section">
+            <h2>欢迎来到优学家教服务平台</h2>
+            <p>我们是一家专注于K12教育的家教服务平台，拥有10年教育行业经验，累计服务超过5000个家庭。我们严格筛选教师资源，确保每位教师都具备专业资质和丰富教学经验，为您的孩子提供最优质的一对一辅导服务。</p>
+           
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div>年教育经验</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div>成功案例</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div>家长满意度</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">800+</div>
+                    <div>认证教师</div>
+                </div>
+            </div>
+           
+            <div class="search-box">
+                <h3>快速寻找最适合的家教老师</h3>
+                <select>
+                    <option>选择科目</option>
+                    <option>语文</option>
+                    <option>数学</option>
+                    <option>英语</option>
+                    <option>物理</option>
+                    <option>化学</option>
+                    <option>生物</option>
+                    <option>历史</option>
+                    <option>地理</option>
+                    <option>政治</option>
+                    <option>奥数</option>
+                    <option>编程</option>
+                </select>
+               
+                <select>
+                    <option>选择年级</option>
+                    <option>小学低年级</option>
+                    <option>小学高年级</option>
+                    <option>初中</option>
+                    <option>高中</option>
+                </select>
+               
+                <select>
+                    <option>选择地区</option>
+                    <option>北京市</option>
+                    <option>上海市</option>
+                    <option>广州市</option>
+                    <option>深圳市</option>
+                    <option>杭州市</option>
+                    <option>南京市</option>
+                    <option>成都市</option>
+                    <option>武汉市</option>
+                    <option>其他城市</option>
+                </select>
+               
+                <button>立即匹配老师</button>
+                <button class="btn-secondary">了解服务流程</button>
+            </div>
+        </div>
+       
+        <div id="teachers" class="section">
+            <h2>优秀教师资源</h2>
+            <p>我们严格筛选每一位教师，确保他们具备专业资质和丰富教学经验。所有教师均通过背景调查和教学能力测试。</p>
+           
+            <div class="teacher-card">
+                <div class="teacher-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="张老师">
+                </div>
+                <div class="teacher-info">
+                    <h3>张老师 - 数学 | 重点中学教师</h3>
+                    <div class="teacher-rating">★★★★★ (4.9)</div>
+                    <p><strong>教学经验：</strong>8年 | <strong>可授课时间：</strong>周一至周五晚上，周末全天</p>
+                    <p><strong>收费标准：</strong>300元/小时 | <strong>授课方式：</strong>线上/线下</p>
+                    <div>
+                        <span class="subject-tag">初中数学</span>
+                        <span class="subject-tag">高中数学</span>
+                        <span class="subject-tag">奥数辅导</span>
+                        <span class="subject-tag">高考冲刺</span>
+                    </div>
+                    <p><strong>教学特点：</strong>重点中学数学教师，教学经验丰富，擅长启发式教学，帮助学生建立数学思维体系。所带学生90%以上在中高考中取得优异成绩。</p>
+                    <button>预约试听</button>
+                    <button class="btn-secondary">查看详细资料</button>
+                </div>
+            </div>
+           
+            <div class="teacher-card">
+                <div class="teacher-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="李老师">
+                </div>
+                <div class="teacher-info">
+                    <h3>李老师 - 英语 | 海归硕士</h3>
+                    <div class="teacher-rating">★★★★★ (4.8)</div>
+                    <p><strong>教学经验：</strong>5年 | <strong>可授课时间：</strong>周末全天</p>
+                    <p><strong>收费标准：</strong>280元/小时 | <strong>授课方式：</strong>线上/线下</p>
+                    <div>
+                        <span class="subject-tag">小学英语</span>
+                        <span class="subject-tag">初中英语</span>
+                        <span class="subject-tag">高中英语</span>
+                        <span class="subject-tag">雅思托福</span>
+                        <span class="subject-tag">口语训练</span>
+                    </div>
+                    <p><strong>教学特点：</strong>英国留学硕士，英语专业八级，发音纯正。擅长将应试技巧与实用英语结合，帮助学生提高英语综合能力。独创"情景式"教学方法，让学习更生动有趣。</p>
+                    <button>预约试听</button>
+                    <button class="btn-secondary">查看详细资料</button>
+                </div>
+            </div>
+           
+            <div class="teacher-card">
+                <div class="teacher-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="王老师">
+                </div>
+                <div class="teacher-info">
+                    <h3>王老师 - 全科辅导 | 教育专家</h3>
+                    <div class="teacher-rating">★★★★★ (5.0)</div>
+                    <p><strong>教学经验：</strong>12年 | <strong>可授课时间：</strong>预约制</p>
+                    <p><strong>收费标准：</strong>500元/小时 | <strong>授课方式：</strong>线下</p>
+                    <div>
+                        <span class="subject-tag">小学全科</span>
+                        <span class="subject-tag">学习方法</span>
+                        <span class="subject-tag">习惯培养</span>
+                        <span class="subject-tag">心理辅导</span>
+                    </div>
+                    <p><strong>教学特点：</strong>教育心理学硕士，专注小学生学习习惯培养和全科辅导。擅长发现学生学习中的问题根源，制定个性化解决方案。帮助100+学生实现从厌学到爱学的转变。</p>
+                    <button>预约试听</button>
+                    <button class="btn-secondary">查看详细资料</button>
+                </div>
+            </div>
+           
+            <div style="text-align: center; margin-top: 30px;">
+                <button>查看更多教师资源</button>
+            </div>
+        </div>
+       
+        <div id="features" class="section">
+            <h2>我们的特色服务</h2>
+            <p>根据不同年龄段学生的需求，我们提供全方位的教育服务解决方案</p>
+           
+            <div class="feature-box">
+                <div class="feature-icon">👶</div>
+                <h3>成长陪伴</h3>
+                <p>针对6-12岁学生，提供课后玩乐陪伴、体育运动陪伴、阅读引导等服务。我们不仅关注学业，更重视孩子的全面发展，培养良好的学习习惯和生活习惯。</p>
+                <button class="btn-secondary">了解详情</button>
+            </div>
+           
+            <div class="feature-box">
+                <div class="feature-icon">📚</div>
+                <h3>学业辅导</h3>
+                <p>针对12-18岁学生，提供学科一对一辅导、作业辅导、考前冲刺等服务。按照学科要求匹配最适合的老师，帮助学生提高学习成绩，掌握学习方法。</p>
+                <button class="btn-secondary">了解详情</button>
+            </div>
+           
+            <div class="feature-box">
+                <div class="feature-icon">🎨</div>
+                <h3>兴趣培养</h3>
+                <p>开设课后兴趣班，包括钢琴陪练、数独教学、编程启蒙、书法绘画、语言训练等。全面发展学生能力，发现和培养孩子的特长与兴趣。</p>
+                <button class="btn-secondary">了解详情</button>
+            </div>
+           
+            <div class="feature-box">
+                <div class="feature-icon">🧠</div>
+                <h3>学习方法指导</h3>
+                <p>针对学习效率低下的学生，提供专业的学习方法指导，包括时间管理、笔记技巧、记忆方法等，帮助学生建立高效学习系统。</p>
+                <button class="btn-secondary">了解详情</button>
+            </div>
+           
+            <div class="feature-box">
+                <div class="feature-icon">💼</div>
+                <h3>升学规划</h3>
+                <p>为初高中学生提供专业的升学规划服务，包括选科指导、志愿填报、自主招生准备等，帮助学生和家长做出最优选择。</p>
+                <button class="btn-secondary">了解详情</button>
+            </div>
+           
+            <div class="feature-box">
+                <div class="feature-icon">❤️</div>
+                <h3>心理辅导</h3>
+                <p>针对青春期学生可能出现的心理问题，提供专业的心理辅导服务，帮助学生建立积极健康的心态，应对学习和生活中的挑战。</p>
+                <button class="btn-secondary">了解详情</button>
+            </div>
+        </div>
+       
+        <div id="pricing" class="section">
+            <h2>收费标准</h2>
+            <p>我们提供多种收费方案，满足不同家庭的需求</p>
+           
+            <table class="price-table">
+                <tr>
+                    <th>教师类型</th>
+                    <th>大学生家教</th>
+                    <th>在职教师</th>
+                    <th>特级教师</th>
+                    <th>教育专家</th>
+                </tr>
+                <tr>
+                    <td>小学课程</td>
+                    <td>120-150元/小时</td>
+                    <td>200-250元/小时</td>
+                    <td>300-400元/小时</td>
+                    <td>500元+/小时</td>
+                </tr>
+                <tr>
+                    <td>初中课程</td>
+                    <td>150-180元/小时</td>
+                    <td>250-300元/小时</td>
+                    <td>350-450元/小时</td>
+                    <td>600元+/小时</td>
+                </tr>
+                <tr>
+                    <td>高中课程</td>
+                    <td>180-220元/小时</td>
+                    <td>300-350元/小时</td>
+                    <td>400-500元/小时</td>
+                    <td>700元+/小时</td>
+                </tr>
+                <tr>
+                    <td>兴趣课程</td>
+                    <td>150-200元/小时</td>
+                    <td>200-300元/小时</td>
+                    <td>350-500元/小时</td>
+                    <td>-</td>
+                </tr>
+            </table>
+           
+            <h3>优惠套餐</h3>
+            <ul>
+                <li><strong>新用户优惠：</strong>首次预约可享受首节课8折优惠</li>
+                <li><strong>套餐优惠：</strong>购买20课时套餐享受9折，50课时套餐享受85折</li>
+                <li><strong>推荐有礼：</strong>成功推荐新用户，双方各获赠2课时</li>
+                <li><strong>团体报名：</strong>3人以上团体报名享受额外折扣</li>
+            </ul>
+        </div>
+       
+        <div id="testimonials" class="section">
+            <h2>学员与家长评价</h2>
+           
+            <div class="testimonial">
+                <p>"张老师的数学课让我的孩子从害怕数学到爱上数学，成绩从70分提升到95分，更重要的是建立了学习数学的信心和方法。"</p>
+                <div class="testimonial-author">- 李女士，初二学生家长</div>
+            </div>
+           
+            <div class="testimonial">
+                <p>"王老师的英语课生动有趣，不再只是死记硬背。我的口语和写作进步很大，上学期英语考试全班第一！"</p>
+                <div class="testimonial-author">- 张同学，高一学生</div>
+            </div>
+           
+            <div class="testimonial">
+                <p>"作为双职工家庭，我们没时间辅导孩子作业。优学的成长陪伴服务不仅解决了作业问题，还培养了孩子良好的学习习惯，太感谢了！"</p>
+                <div class="testimonial-author">- 王先生，小学三年级家长</div>
+            </div>
+           
+            <div style="text-align: center; margin-top: 30px;">
+                <button>查看更多评价</button>
+            </div>
+        </div>
+       
+        <div id="process" class="section">
+            <h2>服务流程</h2>
+           
+            <div class="how-it-works">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>需求评估</h3>
+                    <p>填写需求表或电话咨询，我们的教育顾问将了解您的具体需求</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>教师匹配</h3>
+                    <p>根据学生情况和需求，推荐3-5位最适合的教师供选择</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>免费试听</h3>
+                    <p>安排30分钟免费试听课，确保教师与学生的匹配度</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>正式授课</h3>
+                    <p>确定教师后，签订服务协议，开始正式授课</p>
+                </div>
+            </div>
+           
+            <div style="text-align: center; margin-top: 30px;">
+                <button>立即开始评估</button>
+            </div>
+        </div>
+       
+        <div class="newsletter">
+            <h2>订阅我们的教育资讯</h2>
+            <p>定期获取教育方法、学习技巧和优惠活动信息</p>
+            <input type="email" placeholder="请输入您的邮箱地址">
+            <button>立即订阅</button>
+        </div>
+       
+        <div id="contact" class="section">
+            <h2>联系我们</h2>
+           
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                <div style="flex: 1; padding-right: 30px;">
+                    <h3>联系方式</h3>
+                    <p><strong>客服电话：</strong>400-123-4567 (9:00-21:00)</p>
+                    <p><strong>咨询邮箱：</strong>service@youxue.com</p>
+                    <p><strong>总部地址：</strong>北京市海淀区中关村南大街5号优学大厦</p>
+                    <p><strong>各城市分部：</strong>上海、广州、深圳、杭州、成都、武汉</p>
+                   
+                    <h3 style="margin-top: 30px;">常见问题</h3>
+                    <ul>
+                        <li>如何选择适合的教师？</li>
+                        <li>线上和线下授课有什么区别？</li>
+                        <li>不满意教师可以更换吗？</li>
+                        <li>如何评估学习效果？</li>
+                    </ul>
+                    <button style="margin-top: 20px;">查看全部问题</button>
+                </div>
+               
+                <div style="flex: 1;">
+                    <h3>在线咨询</h3>
+                    <form class="contact-form">
+                        <input type="text" placeholder="您的姓名" required>
+                        <input type="tel" placeholder="联系电话">
+                        <input type="email" placeholder="电子邮箱" required>
+                        <select required>
+                            <option value="">咨询类型</option>
+                            <option>教师咨询</option>
+                            <option>课程咨询</option>
+                            <option>费用咨询</option>
+                            <option>其他问题</option>
+                        </select>
+                        <textarea placeholder="请详细描述您的需求..."></textarea>
+                        <button type="submit">提交咨询</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 15px 0;">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <div style="padding: 5px 10px; min-width: 150px;">
+                    <h4 style="margin: 10px 0; font-size: 16px;">关于我们</h4>
+                    <p style="margin: 5px 0; font-size: 14px;">公司简介</p >
+                    <p style="margin: 5px 0; font-size: 14px;">团队介绍</p >
+                    <p style="margin: 5px 0; font-size: 14px;">加入我们</p >
+                </div>
+                <div style="padding: 5px 10px; min-width: 150px;">
+                    <h4 style="margin: 10px 0; font-size: 16px;">教师资源</h4>
+                    <p style="margin: 5px 0; font-size: 14px;">教师招聘</p >
+                    <p style="margin: 5px 0; font-size: 14px;">教师培训</p >
+                    <p style="margin: 5px 0; font-size: 14px;">教师认证</p >
+                </div>
+                <div style="padding: 5px 10px; min-width: 150px;">
+                    <h4 style="margin: 10px 0; font-size: 16px;">家长服务</h4>
+                    <p style="margin: 5px 0; font-size: 14px;">家长课堂</p >
+                    <p style="margin: 5px 0; font-size: 14px;">教育资讯</p >
+                    <p style="margin: 5px 0; font-size: 14px;">活动报名</p >
+                </div>
+                <div style="padding: 5px 10px; min-width: 150px;">
+                    <h4 style="margin: 10px 0; font-size: 16px;">关注我们</h4>
+                    <p style="margin: 5px 0; font-size: 14px;">微信公众号</p >
+                    <p style="margin: 5px 0; font-size: 14px;">微博</p >
+                    <p style="margin: 5px 0; font-size: 14px;">抖音</p >
+                </div>
+            </div>
+            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #555; text-align: center; font-size: 12px;">
+                &copy; 2023 优学家教服务平台 版权所有 | 京ICP备12345678号
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
